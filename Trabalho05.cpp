@@ -1,4 +1,5 @@
-#include <iostream>
+/*#include <iostream>
+
 #include <cstdlib>
 #include <cstdio>
 #include "ListaContabil.h"
@@ -94,11 +95,11 @@ void lancarTran() {
 				" número válido, real, maior ou igual a 0 !\n");
 
 	}
-   /*
+
    ATENCAO: Voce tem que garantir que o char * recebido do string nome
    tem que ser tratado no construtor do lançamento para ocupar o menor
    espaço em memoria possivel. Isso vale 1 ponto na nota do trabalho!
-   */
+
 	Lancamento lan = Lancamento((char *)nome.c_str(), valor);
 	if (listaAtual->adiciona(lan) == ERROLISTACHEIA) {
 		printf("Impossível adicionar nova transação! Erro de lista cheia!");
@@ -173,3 +174,4 @@ int main() {
 
 }
 
+*/

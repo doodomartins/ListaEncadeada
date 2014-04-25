@@ -1,48 +1,50 @@
 #ifndef CABEDADALISTA_H
 #define CABEDADALISTA_H
+#include "Elemento.hpp"
 
 template <typename T>
 class CabecaDaLista {
 	public:
-		CabecaDaLista(T* dados);
+		CabecaDaLista();
 		~CabecaDaLista();
 		int getTamanho();
-		T* getDados();
-		void setDados();
+		const Elemento<T>& getDados();
+		void setDados(const Elemento<T>& dados) const;
 		void addTamanho();
 
 	private:
-		T* dados;
+		Elemento<T>* dados;
 		int tamanho;
 };
 
 template<typename T>
-CabecaDaLista::CabecaDaLista(){
+CabecaDaLista<T>::CabecaDaLista(){
 	dados = NULL;
+	tamanho = 0;
 
 }
 
 template<typename T>
-CabecaDaLista::~CabecaDaLista(){
+CabecaDaLista<T>::~CabecaDaLista(){
 }
 
 template<typename T>
-int CabecaDaLista::getTamanho(){
+int CabecaDaLista<T>::getTamanho(){
 	return this->tamanho;
 }
 
 template<typename T>
-T* CabecaDaLista::getdados(){
-	return this->dados;
+const Elemento<T>& CabecaDaLista<T>::getDados() {
+	return *(this->dados);
 }
 
 template<typename T>
-void CabecaDaLista::setDados(T* dados){
+void CabecaDaLista<T>::setDados(const Elemento<T>& dados) const{
     this->dados = dados;
 }
 
 template<typename T>
-void CabecaDaLista::addTamanho(){
+void CabecaDaLista<T>::addTamanho(){
     this->tamanho++;
 }
 

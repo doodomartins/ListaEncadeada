@@ -1,16 +1,16 @@
 #ifndef LISTAENCADEADA_HPP
 #define LISTAENCADEADA_HPP
 #include "CabecaDaLista.hpp"
-#include "ElementoDaLista.hpp"
+#include "Elemento.hpp"
+#include "ListaCheia.h"
 
-template<typename T>
-class ListaEncadeada {
+template<typename T> class ListaEncadeada {
 	public:
 		ListaEncadeada();
 		~ListaEncadeada();
 
 		//void adiciona(T* dado);
-		void adicionaNoInicio(T* dado);
+		void adicionaNoInicio(const T& dado);
 		//void adicionaNaPos(T* dado);
 		//void adicionaEmOrdem(T* dado);
 
@@ -25,30 +25,30 @@ class ListaEncadeada {
 
 
 	private:
-		CabecaDaLista cabeca;
+		CabecaDaLista<T>* cabeca;
 };
 
 template <typename T>
-ListaEncadeada::ListaEncadeada(){
-	cabeca = new CabecaDaLista(NULL);
+ListaEncadeada<T>::ListaEncadeada(){
+	cabeca = new CabecaDaLista<T>();
 }
 
 template <typename T>
-ListaEncadeada::~ListaEncadeada(){
+ListaEncadeada<T>::~ListaEncadeada(){
 	//TODO deletar tudo que tem new na lista
 }
 
 template <typename T>
-bool ListaEncadeada::vazia(){
+bool ListaEncadeada<T>::vazia(){
 	return this->cabeca.getTamanho()==0;
 }
 
 template <typename T>
-void ListaEncadeada::adcionaNoInicio(T* informacao){
-    ElementoDaLista<T> *novoDado = new ElementoDaLista<T>(informacao,this->cabeca.getDados());
+void ListaEncadeada<T>::adicionaNoInicio(const T& dado){
+    Elemento<T>* novoDado = new Elemento<T>(dado,cabeca->getDados());
     if (novoDado != NULL) {
-        cabeca.addTamanho();
-        cabeca.setDados(novoDado);
+        cabeca->addTamanho();
+        cabeca->setDados(*novoDado);
     } else{
         throw ListaCheia();
     }
