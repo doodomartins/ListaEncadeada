@@ -1,6 +1,5 @@
 #ifndef LISTAENCADEADA_HPP
 #define LISTAENCADEADA_HPP
-#include "CabecaDaLista.hpp"
 #include "Elemento.hpp"
 #include "ListaCheia.h"
 #include "PosInvalida.h"
@@ -11,16 +10,10 @@ template<typename T> class ListaEncadeada {
 		ListaEncadeada();
 		~ListaEncadeada();
 
-<<<<<<< HEAD
-		void adiciona(T* dado);
-		void adicionaNoInicio(T* dado);
+		void adiciona(T*);
+		void adicionaNoInicio(T*);
 		void adicionaNaPos(T*, int);
-=======
-		//void adiciona(T* dado);
-		void adicionaNoInicio(T& dado);
-		//void adicionaNaPos(T* dado);
->>>>>>> 666728a1fb04f3e2de92d687cedbbba6b108710a
-		//void adicionaEmOrdem(T* dado);
+ 		//void adicionaEmOrdem(T* dado);
 
 		T retira();
 		T retiraDoInicio();
@@ -28,8 +21,12 @@ template<typename T> class ListaEncadeada {
 		//T retiraEspecifico(T* dado);
 
 		bool vazia();
-		//int posicao(T* dado);
-		//bool contem(T* dado);
+        int getTamanho();
+        T mostra(int);
+       // void destroiLista();
+		// int posicao(T* dado);
+		// bool contem(T* dado);
+
 
 
 	private:
@@ -39,13 +36,14 @@ template<typename T> class ListaEncadeada {
 
 template <typename T>
 ListaEncadeada<T>::ListaEncadeada(){
-	cabeca = new Elemento<T>(NULL,NULL);
+	cabeca = new Elemento<T>(0,0);
 	tamanho = 0;
 }
 
 template <typename T>
 ListaEncadeada<T>::~ListaEncadeada(){
 	//TODO deletar tudo que tem new na lista
+   // this->destroiLista();
 }
 
 template <typename T>
@@ -54,14 +52,9 @@ bool ListaEncadeada<T>::vazia(){
 }
 
 template <typename T>
-<<<<<<< HEAD
 void ListaEncadeada<T>::adicionaNoInicio(T* dado){
     Elemento<T>* novoDado = new Elemento<T>(dado,cabeca->getProximoElemento());
-=======
-void ListaEncadeada<T>::adicionaNoInicio(T& dado){
-    Elemento<T>* novoDado = new Elemento<T>(dado,cabeca->getDados());
->>>>>>> 666728a1fb04f3e2de92d687cedbbba6b108710a
-    if (novoDado != NULL) {
+    if (novoDado != 0) {
         tamanho++;
         cabeca->setProximoElemento(novoDado);
     } else{
@@ -77,8 +70,8 @@ void ListaEncadeada<T>::adicionaNaPos(T* dado, int pos){
     } else if(pos == 0){
         this->adicionaNoInicio(dado);
     } else{
-        Elemento<T>* novoDado = new Elemento<T>(dado,NULL);
-        if(novoDado != NULL){
+        Elemento<T>* novoDado = new Elemento<T>(dado,0);
+        if(novoDado != 0){
             //Cria um elemento aux(antetior) que é o elemento, que apontara para o novo elemento
             Elemento<T>* anterior = cabeca->getProximoElemento();
             for(int i = 0; i<pos -1; i++){
@@ -143,5 +136,54 @@ T ListaEncadeada<T>::retiraDaPos(int pos){
 template <typename T>
 T ListaEncadeada<T>::retira(){
     this->retiraDaPos(tamanho-1);
+}   
+
+ template <typename T>
+ int ListaEncadeada<T>::getTamanho() {
+     return tamanho;
+ }
+
+ template <typename T>
+ T ListaEncadeada<T>::mostra(int pos){
+     if(pos > this->tamanho){
+        throw PosInvalida();
+    } else if(pos == 0){
+        return cabeca->getProximoElemento()->getInformacao();
+    } else{
+            Elemento<T>* aux = cabeca->getProximoElemento();
+            for(int i = 0; i<pos -1; i++){
+                aux = aux->getProximoElemento();
+            }
+            return aux->getProximoElemento()->getInformacao();
+     }
 }
+
+// template <typename T>
+// void destroiLista(){
+//     this->~ListaEncadeada();
+//     }
+// }
+
 #endif
+
+// template<typename T>
+// int ListaEncadeada<T>::posicao(T dado) {
+//     return 0;
+// }
+
+// template<typename T>
+// bool ListaEncadeada<T>::contem(T dado) {
+//     if(this->vazia()){
+//         throw ListaVazia();
+//     } else{
+//          Elemento<T>* aux = cabeca->getProximoElemento();
+//             for(int i = 0; i<tamanho; i++){
+//                 if(aux.getInformacao == dado){
+//                     return true;
+//                 }
+//                 aux = aux->getProximoElemento();
+//             }
+//             return false;
+//     }
+// }
+

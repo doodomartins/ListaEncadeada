@@ -7,6 +7,9 @@
 
 using namespace std;
 
+//TODO na hora de mostrar a lista buga, na hora de add o segundo buga, 
+//na hora de remover, buga tudo, nao submeti nada
+
 string listaAtualTexto = "Débitos";
 char opcao;
 string mensagem = "";
@@ -15,10 +18,11 @@ ListaContabil listaDebito = ListaContabil();
 ListaContabil *listaAtual = &listaDebito;
 
 void listarTran() {
-	if ((*listaAtual).listaVazia())
+	if ((*listaAtual).vazia())
 		printf("Lista vazia! Impossível imprimir\n");
 	else {
-		for (int i = 0; i <= (*listaAtual).verUltimo(); i++) {
+	//So nao sei se a logica da pos ta certa
+		for (int i = 0; i < (*listaAtual).getTamanho(); i++) {
 			printf("(%i) %s %.2f\n", i, ((*listaAtual).mostra(i).nome()),
 					(*listaAtual).mostra(i).valor());
 		}
@@ -40,7 +44,7 @@ void remTran() {
 		getchar();
 		switch (opcao) {
 		case 't':
-			listaAtual->destroiLista();
+			listaAtual->~ListaContabil();
 			printf("Lista destruída!");
 		   sair = true;
 			break;
@@ -50,19 +54,30 @@ void remTran() {
 				getline(cin, input);
 				stringstream myStream(input);
 				if (myStream >> valor)
-					if (valor >= 0 && valor <= listaAtual->verUltimo())
+					if (valor >= 0 && valor <= listaAtual->getTamanho())
 						break;
 				printf(
 						"Número inválido... Entre com um"
 								" número válido, inteiro, maior ou igual a 0 e menor ou igual a %i !\n",
-						listaAtual->verUltimo());
+						listaAtual->getTamanho());
 			}
-			if (listaAtual->retiraDaPosicao(valor) == ERROPOSICAOLAN)
-				printf("Se você chegou aqui o progamador é um burro!");
-			else
+			
+			try{
+				listaAtual->retiraDaPos(valor);
 				printf("Lancamento removido com sucesso!\n");
-			sair = true;
-			break;
+				sair = true;
+				break;
+			} catch(PosInvalida ex){
+				printf("Se você chegou aqui o progamador é um burro!");
+				break;
+			}
+
+			// if (listaAtual->retiraDaPosicao(valor) == ERROPOSICAOLAN)
+			// 	printf("Se você chegou aqui o progamador é um burro!");
+			// else
+			// 	printf("Lancamento removido com sucesso!\n");
+			// sair = true;
+			// break;
 		case 's':
 			printf(
 					"Você saiu do menu de remoção.");
@@ -100,21 +115,30 @@ void lancarTran() {
    espaço em memoria possivel. Isso vale 1 ponto na nota do trabalho!
 */
 	Lancamento lan = Lancamento((char *)nome.c_str(), valor);
-	if (listaAtual->adiciona(lan) == ERROLISTACHEIA) {
-		printf("Impossível adicionar nova transação! Erro de lista cheia!");
 
-	} else
+	try{
+		listaAtual->adiciona(&lan);
 		printf("Lancamento adicionado com sucesso!");
+	}catch(ListaCheia ex){
+		printf("Impossível adicionar nova transação! Erro de lista cheia!");
 	}
+
+
+	// if (listaAtual->adiciona(lan) == ERROLISTACHEIA) {
+	// 	printf("Impossível adicionar nova transação! Erro de lista cheia!");
+
+	// } else
+	// 	printf("Lancamento adicionado com sucesso!");
+ }
 
 void mostraSaldo() {
 	double tCredito = 0;
 	double tDebito = 0;
 
-	for (int i = 0; i <= listaCredito.verUltimo(); i++)
-		tCredito += listaCredito.verTrasacao(i).valor();
-	for (int i = 0; i <= listaDebito.verUltimo(); i++)
-		tDebito += listaDebito.verTrasacao(i).valor();
+	for (int i = 0; i < listaCredito.getTamanho(); i++)
+		tCredito += listaCredito.mostra(i).valor();
+	for (int i = 0; i < listaDebito.getTamanho(); i++)
+		tDebito += listaDebito.mostra(i).valor();
 
 	printf("\nTotal (Créditos - Débitos): \n     %.2f", tCredito - tDebito);
 }

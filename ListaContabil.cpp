@@ -1,11 +1,10 @@
 #include "ListaContabil.h"
 
-ListaContabil::ListaContabil()
-{
+ListaContabil::ListaContabil(){
     //ctor
 }
 
-ListaContabil::~ListaContabil()
-{
+ListaContabil::~ListaContabil(){
     //dtor
 }
+
