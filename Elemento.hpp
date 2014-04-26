@@ -4,17 +4,18 @@
 template <typename T>
 class Elemento {
 	public:
-		Elemento(const T& informacao, const Elemento<T>& proximoElemento);
+		Elemento(T*, Elemento<T>*);
 		~Elemento();
-		Elemento<T>* getProximoElemento() const;
-		T getInformacao() const;
+		Elemento<T>* getProximoElemento();
+		void setProximoElemento(Elemento<T>*);
+		T getInformacao();
 	private:
-		const Elemento<T>& proximoElemento;
-		const T& informacao;
+		Elemento<T>* proximoElemento;
+		T* informacao;
 };
 
 template <typename T>
-Elemento<T>::Elemento(const T& informacao, const Elemento<T>& proximoElemento)
+Elemento<T>::Elemento(T* informacao, Elemento<T>* proximoElemento)
 	: proximoElemento(proximoElemento),
 	  informacao(informacao)
 	  {}
@@ -24,13 +25,17 @@ Elemento<T>::~Elemento() {
 }
 
 template <typename T>
-Elemento<T>* Elemento<T>::getProximoElemento() const {
+Elemento<T>* Elemento<T>::getProximoElemento(){
 	return this->proximoElemento;
 }
 
 template <typename T>
-T Elemento<T>::getInformacao() const {
+T Elemento<T>::getInformacao() {
 	return *(this->informacao);
 }
 
+template <typename T>
+void Elemento<T>::setProximoElemento(Elemento<T>* elemento){
+    this->proximoElemento = elemento;
+}
 #endif
