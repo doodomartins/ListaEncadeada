@@ -8,8 +8,8 @@ class CabecaDaLista {
 		CabecaDaLista();
 		~CabecaDaLista();
 		int getTamanho();
-		const Elemento<T>& getDados();
-		void setDados(const Elemento<T>& dados) const;
+		Elemento<T>& getDados() const;
+		void setDados(Elemento<T>& dados);
 		void addTamanho();
 
 	private:
@@ -34,13 +34,13 @@ int CabecaDaLista<T>::getTamanho(){
 }
 
 template<typename T>
-const Elemento<T>& CabecaDaLista<T>::getDados() {
+Elemento<T>& CabecaDaLista<T>::getDados() const {
 	return *(this->dados);
 }
 
 template<typename T>
-void CabecaDaLista<T>::setDados(const Elemento<T>& dados) const{
-    this->dados = dados;
+void CabecaDaLista<T>::setDados(Elemento<T>& dados){
+    this->dados = &dados;
 }
 
 template<typename T>

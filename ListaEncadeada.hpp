@@ -11,9 +11,15 @@ template<typename T> class ListaEncadeada {
 		ListaEncadeada();
 		~ListaEncadeada();
 
+<<<<<<< HEAD
 		void adiciona(T* dado);
 		void adicionaNoInicio(T* dado);
 		void adicionaNaPos(T*, int);
+=======
+		//void adiciona(T* dado);
+		void adicionaNoInicio(T& dado);
+		//void adicionaNaPos(T* dado);
+>>>>>>> 666728a1fb04f3e2de92d687cedbbba6b108710a
 		//void adicionaEmOrdem(T* dado);
 
 		T retira();
@@ -48,8 +54,13 @@ bool ListaEncadeada<T>::vazia(){
 }
 
 template <typename T>
+<<<<<<< HEAD
 void ListaEncadeada<T>::adicionaNoInicio(T* dado){
     Elemento<T>* novoDado = new Elemento<T>(dado,cabeca->getProximoElemento());
+=======
+void ListaEncadeada<T>::adicionaNoInicio(T& dado){
+    Elemento<T>* novoDado = new Elemento<T>(dado,cabeca->getDados());
+>>>>>>> 666728a1fb04f3e2de92d687cedbbba6b108710a
     if (novoDado != NULL) {
         tamanho++;
         cabeca->setProximoElemento(novoDado);

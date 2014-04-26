@@ -4,7 +4,11 @@
 template <typename T>
 class Elemento {
 	public:
+<<<<<<< HEAD
 		Elemento(T*, Elemento<T>*);
+=======
+		Elemento(T& informacao, Elemento<T>& proximoElemento);
+>>>>>>> 666728a1fb04f3e2de92d687cedbbba6b108710a
 		~Elemento();
 		Elemento<T>* getProximoElemento();
 		void setProximoElemento(Elemento<T>*);
@@ -15,9 +19,15 @@ class Elemento {
 };
 
 template <typename T>
+<<<<<<< HEAD
 Elemento<T>::Elemento(T* informacao, Elemento<T>* proximoElemento)
 	: proximoElemento(proximoElemento),
 	  informacao(informacao)
+=======
+Elemento<T>::Elemento(T& informacao, Elemento<T>& proximoElemento)
+	: proximoElemento(&proximoElemento),
+	  informacao(&informacao)
+>>>>>>> 666728a1fb04f3e2de92d687cedbbba6b108710a
 	  {}
 
 template <typename T>
