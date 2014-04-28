@@ -8,12 +8,26 @@
     
     
 //     ListaContabil lista;
-//     Lancamento lan1 = Lancamento((char*)"rolaaaaaaaaa", 2);
-//     lista.adicionaNoInicio(&lan1);
-//     for(int i = 0; i<6; i++){
-//     Lancamento lan = Lancamento((char*)"rola", i);
-//     lista.adicionaNoInicio(&lan);
-//     }
+//     Lancamento a = Lancamento((char*)"a", 1);
+//     lista.adiciona(&a);
+
+//     Lancamento b = Lancamento((char*)"a", 2);
+//     lista.adiciona(&b);
+
+//     Lancamento c = Lancamento((char*)"a", 3);
+//     lista.adiciona(&c);
+
+//     Lancamento d = Lancamento((char*)"a", 4);
+//     lista.adiciona(&d);
+
+//     Lancamento e = Lancamento((char*)"a", 5);
+//     lista.adiciona(&e);
+
+//     Lancamento f = Lancamento((char*)"a", 6);
+//     lista.adiciona(&f);
+
+    
+    
     
 
 //      // lista.adicionaNoInicio(&lan);

@@ -21,7 +21,6 @@ void listarTran() {
 	if ((*listaAtual).vazia())
 		printf("Lista vazia! Impossível imprimir\n");
 	else {
-	//So nao sei se a logica da pos ta certa
 		for (int i = 0; i < (*listaAtual).getTamanho(); i++) {
 			printf("(%i) %s %.2f\n", i, ((*listaAtual).mostra(i).nome()),
 					(*listaAtual).mostra(i).valor());
@@ -44,7 +43,7 @@ void remTran() {
 		getchar();
 		switch (opcao) {
 		case 't':
-			listaAtual->~ListaContabil();
+			listaAtual->destroiLista();
 			printf("Lista destruída!");
 		   sair = true;
 			break;
@@ -114,10 +113,10 @@ void lancarTran() {
    tem que ser tratado no construtor do lançamento para ocupar o menor
    espaço em memoria possivel. Isso vale 1 ponto na nota do trabalho!
 */
-	Lancamento lan = Lancamento((char *)nome.c_str(), valor);
+	Lancamento* lan = new Lancamento((char *)nome.c_str(), valor);
 
 	try{
-		listaAtual->adiciona(&lan);
+		listaAtual->adiciona(lan);
 		printf("Lancamento adicionado com sucesso!");
 	}catch(ListaCheia ex){
 		printf("Impossível adicionar nova transação! Erro de lista cheia!");

@@ -4,6 +4,9 @@
 #include "ListaCheia.h"
 #include "PosInvalida.h"
 #include "ListaVazia.h"
+#include <iostream>
+using namespace std;
+
 
 template<typename T> class ListaEncadeada {
 	public:
@@ -13,19 +16,16 @@ template<typename T> class ListaEncadeada {
 		void adiciona(T*);
 		void adicionaNoInicio(T*);
 		void adicionaNaPos(T*, int);
- 		//void adicionaEmOrdem(T* dado);
 
 		T retira();
 		T retiraDoInicio();
 		T retiraDaPos(int);
-		//T retiraEspecifico(T* dado);
 
 		bool vazia();
         int getTamanho();
         T mostra(int);
-       // void destroiLista();
-		// int posicao(T* dado);
-		// bool contem(T* dado);
+        void destroiLista();
+
 
 
 
@@ -101,7 +101,8 @@ T ListaEncadeada<T>::retiraDoInicio(){
         Elemento<T>* saiu = cabeca->getProximoElemento();
         T retorno = saiu->getInformacao();
         cabeca->setProximoElemento(saiu->getProximoElemento());
-        saiu->~Elemento();
+        //saiu->~Elemento();
+        delete saiu;
         tamanho--;
         return retorno;
     }
@@ -128,7 +129,9 @@ T ListaEncadeada<T>::retiraDaPos(int pos){
             //Aponta o proximo elemento do anterior para o proximo elemento dps do eliminado
             anterior->setProximoElemento(eliminar->getProximoElemento());
             tamanho--;
-            eliminar->~Elemento();
+            
+            delete  eliminar;
+           // eliminar->~Elemento();
             return retorno;
     }
 }
@@ -158,32 +161,18 @@ T ListaEncadeada<T>::retira(){
      }
 }
 
-// template <typename T>
-// void destroiLista(){
-//     this->~ListaEncadeada();
-//     }
-// }
+template <typename T>
+void ListaEncadeada<T>::destroiLista(){
+   while(true){
+    
+    //cout << this->tamanho << "antes de tirar" <<endl;
+    try{    
+    this->retiraDoInicio();
+    } catch(ListaVazia ex){
+        return;
+    }
+    //cout << this->tamanho << "dps de tirar"<<endl;
+   }
+}
 
 #endif
-
-// template<typename T>
-// int ListaEncadeada<T>::posicao(T dado) {
-//     return 0;
-// }
-
-// template<typename T>
-// bool ListaEncadeada<T>::contem(T dado) {
-//     if(this->vazia()){
-//         throw ListaVazia();
-//     } else{
-//          Elemento<T>* aux = cabeca->getProximoElemento();
-//             for(int i = 0; i<tamanho; i++){
-//                 if(aux.getInformacao == dado){
-//                     return true;
-//                 }
-//                 aux = aux->getProximoElemento();
-//             }
-//             return false;
-//     }
-// }
-

@@ -22,6 +22,8 @@ Elemento<T>::Elemento(T* informacao, Elemento<T>* proximoElemento){
 
 template <typename T>
 Elemento<T>::~Elemento() {
+	//delete  informacao;
+	//delete  proximoElemento;
 }
 
 template <typename T>
